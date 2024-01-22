@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width - 16,
                   height: 200,
                   isCornerRounded: true,
+                  colorsList: [Color(0xff275e45), Color(0xff56b295)],
                   color: Colors.blue,
                   child: const TicketData())
             ],
