@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<List<Color>> colorsList = [
+  List<List<Color>> colorsList = const [
     [Color(0xffa9507c), Color(0xFFDB86AD)],
     [Color(0xff7b4fd0), Color(0xFFA382E6)],
     [Color(0xff275e45), Color(0xff56b295)],
@@ -43,11 +43,11 @@ class _HomePageState extends State<HomePage> {
                     3,
                     (index) {
                       return Positioned(
-                        top: index * 74,
+                        top: index * 82,
                         child: TicketWidget(
                           margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                           width: MediaQuery.of(context).size.width - 16,
-                          height: 180,
+                          height: 200,
                           isCornerRounded: true,
                           colorsList: colorsList[index % colorsList.length],
                           color: Colors.blue,
@@ -104,10 +104,13 @@ class TicketData extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 8,
+          ),
           Row(
             children: [
               const SizedBox(
-                width: 8,
+                width: 12,
               ),
               Container(
                 height: 100,
