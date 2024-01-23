@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_booking/components/ticket_widget.dart';
-import 'package:ticket_booking/constants.dart';
+import 'package:ticket_booking/config/constants.dart';
+import 'package:ticket_booking/config/theme/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,15 +20,18 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.fromLTRB(8, 32, 8, 24),
           child: Column(
             children: [
-              const Text(
+              Text(
                 'Your tickets',
-                style: TextStyle(color: Colors.white),
+                style: typography(context).title1,
+              ),
+              const SizedBox(
+                height: 16,
               ),
               TicketWidget(
                   width: MediaQuery.of(context).size.width - 16,
                   height: 180,
                   isCornerRounded: true,
-                  colorsList: [Color(0xff275e45), Color(0xff56b295)],
+                  colorsList: const [Color(0xff275e45), Color(0xff56b295)],
                   color: Colors.blue,
                   child: const TicketData())
             ],
@@ -69,34 +73,54 @@ class TicketData extends StatelessWidget {
               const SizedBox(
                 width: 12,
               ),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Anuj Jain'),
-                  Text('India Tour 2023'),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.pin_drop_sharp,
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text('03-04-2023, 11:00am - 2:00pm'),
-                    ],
+                  Text(
+                    'Anuj Jain',
+                    style: typography(context).title3,
                   ),
-                  SizedBox(
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'India Tour 2023',
+                    style: typography(context).smallBody,
+                  ),
+                  const SizedBox(
                     height: 4,
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.pin_drop_sharp,
+                        size: 18,
+                        color: Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
-                      Text('Mumbai Stadium, Mumbai, India'),
+                      Text(
+                        '03-04-2023, 11:00am - 2:00pm',
+                        style: typography(context).smallBody,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.pin_drop_sharp,
+                        size: 18,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text('Mumbai Stadium, Mumbai, India',
+                          style: typography(context).smallBody),
                     ],
                   ),
                 ],
