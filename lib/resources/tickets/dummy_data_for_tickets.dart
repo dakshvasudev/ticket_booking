@@ -2,32 +2,32 @@ import 'package:ticket_booking/resources/tickets/models.dart';
 
 List<SingerInfo> singerInfoList = const [
   SingerInfo(
-    'John Doe',
+    'Anuj Jain',
     'India Tour 2023',
     '2024-01-24 18:00',
     'Concert Hall',
   ),
   SingerInfo(
-    'Jane Smith',
-    'Live Performance',
+    'Tylor Swift',
+    'India Tour 2023',
     '2024-01-25 20:00',
     'Music Arena',
   ),
   SingerInfo(
     'Bob Johnson',
-    'Acoustic Session',
+    'India Tour 2023',
     '2024-01-26 15:30',
-    'Cozy Lounge',
+    'Mumbai Stadium, Mumbai, India',
   ),
   SingerInfo(
-    'Alice Brown',
-    'Album Launch',
+    'Chester Bennington',
+    'India Tour 2023',
     '2024-01-28 19:45',
     'Grand Auditorium',
   ),
   SingerInfo(
-    'Chris Williams',
-    'Music Festival',
+    'Anson Seabra',
+    'India Tour 2023',
     '2024-01-30 21:15',
     'Outdoor Stage',
   ),

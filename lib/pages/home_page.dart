@@ -14,13 +14,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<List<Color>> colorsList = [
+    [Color(0xffa9507c), Color(0xFFDB86AD)],
+    [Color(0xff7b4fd0), Color(0xFFA382E6)],
     [Color(0xff275e45), Color(0xff56b295)],
-    [Color(0xff123456), Color(0xff789abc)],
-    [Color(0xffaabbcc), Color(0xffddeeff)],
     [Color(0xff987654), Color(0xfffedcba)],
     [Color(0xff112233), Color(0xff445566)],
-    [Color(0xff770000), Color(0xffcc3333)],
-    [Color(0xff0088cc), Color(0xff99cc00)],
     // Add more lists of colors as needed
   ];
   @override
@@ -42,10 +40,10 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Stack(
                   children: List.generate(
-                    singerInfoList.length,
+                    3,
                     (index) {
                       return Positioned(
-                        top: index * 60,
+                        top: index * 74,
                         child: TicketWidget(
                           margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                           width: MediaQuery.of(context).size.width - 16,
