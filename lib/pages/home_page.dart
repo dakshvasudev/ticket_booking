@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
               ),
               TicketWidget(
                   width: MediaQuery.of(context).size.width - 16,
-                  height: 200,
+                  height: 180,
                   isCornerRounded: true,
                   colorsList: [Color(0xff275e45), Color(0xff56b295)],
                   color: Colors.blue,
@@ -52,12 +52,15 @@ class TicketData extends StatelessWidget {
         children: [
           Row(
             children: [
+              const SizedBox(
+                width: 8,
+              ),
               Container(
                 height: 80,
                 width: 75,
                 decoration: BoxDecoration(
                     image: const DecorationImage(
-                      image: NetworkImage('https://picsum.photos/200'),
+                      image: NetworkImage('https://picsum.photos/80/75'),
                       fit: BoxFit.cover,
                     ),
                     border: Border.all(color: Colors.transparent),
@@ -74,7 +77,7 @@ class TicketData extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.share_location,
+                        Icons.pin_drop_sharp,
                       ),
                       SizedBox(
                         width: 4,
@@ -88,7 +91,7 @@ class TicketData extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.share_location,
+                        Icons.pin_drop_sharp,
                       ),
                       SizedBox(
                         width: 4,
@@ -101,14 +104,15 @@ class TicketData extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 22,
+            height: 16,
           ),
           Container(
             width: MediaQuery.of(context).size.width - 48,
-            height: 60.0,
+            height: 45.0,
+            margin: const EdgeInsets.only(left: 7),
             decoration: const BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/images/barcode.png'),
+              image: AssetImage('assets/images/barr.png'),
               fit: BoxFit.cover,
             )),
           ),
