@@ -60,6 +60,30 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              // Expanded(
+              //   child: Stack(
+              //     children: List.generate(
+              //       2,
+              //       (index) {
+              //         final dataIndex = singerInfoList.length - 2 + index;
+              //         return Positioned(
+              //           top: index * 74 + 200,
+              //           child: TicketWidget(
+              //             margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+              //             width: MediaQuery.of(context).size.width - 16,
+              //             height: 180,
+              //             isCornerRounded: true,
+              //             colorsList: colorsList[dataIndex],
+              //             color: Colors.blue,
+              //             child: TicketData(
+              //               singerInfo: singerInfoList[dataIndex],
+              //             ),
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
