@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ticket_booking/components/ticket_widget.dart';
 import 'package:ticket_booking/config/constants.dart';
 import 'package:ticket_booking/config/theme/theme.dart';
+import 'package:ticket_booking/resources/tickets/dummy_data_for_tickets.dart';
+import 'package:ticket_booking/resources/tickets/models.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,7 +35,9 @@ class _HomePageState extends State<HomePage> {
                   isCornerRounded: true,
                   colorsList: const [Color(0xff275e45), Color(0xff56b295)],
                   color: Colors.blue,
-                  child: const TicketData())
+                  child: TicketData(
+                    singerInfo: singerInfoList[0],
+                  ))
             ],
           ),
         ),
@@ -43,9 +47,9 @@ class _HomePageState extends State<HomePage> {
 }
 
 class TicketData extends StatelessWidget {
-  const TicketData({
-    Key? key,
-  }) : super(key: key);
+  const TicketData({Key? key, required this.singerInfo}) : super(key: key);
+
+  final SingerInfo singerInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +64,8 @@ class TicketData extends StatelessWidget {
                 width: 8,
               ),
               Container(
-                height: 80,
-                width: 75,
+                height: 100,
+                width: 100,
                 decoration: BoxDecoration(
                     image: const DecorationImage(
                       image: NetworkImage('https://picsum.photos/80/75'),
@@ -77,14 +81,14 @@ class TicketData extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Anuj Jain',
+                    singerInfo.name,
                     style: typography(context).title3,
                   ),
                   const SizedBox(
                     height: 4,
                   ),
                   Text(
-                    'India Tour 2023',
+                    singerInfo.event,
                     style: typography(context).smallBody,
                   ),
                   const SizedBox(
@@ -101,7 +105,7 @@ class TicketData extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        '03-04-2023, 11:00am - 2:00pm',
+                        singerInfo.dateAndTime,
                         style: typography(context).smallBody,
                       ),
                     ],
@@ -119,7 +123,7 @@ class TicketData extends StatelessWidget {
                       const SizedBox(
                         width: 4,
                       ),
-                      Text('Mumbai Stadium, Mumbai, India',
+                      Text(singerInfo.venue,
                           style: typography(context).smallBody),
                     ],
                   ),
