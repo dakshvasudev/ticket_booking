@@ -104,8 +104,20 @@ class TicketData extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 8,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'W893458DFJVB923',
+                style: typography(context).preTitle,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+            ],
           ),
           Row(
             children: [
