@@ -31,5 +31,4 @@ List<SingerInfo> singerInfoList = const [
     '2024-01-30 21:15',
     'Outdoor Stage',
   ),
-  // Add more SingerInfo objects as needed
 ];

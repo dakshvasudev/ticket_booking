@@ -13,6 +13,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<List<Color>> colorsList = [
+    [Color(0xff275e45), Color(0xff56b295)],
+    [Color(0xff123456), Color(0xff789abc)],
+    [Color(0xffaabbcc), Color(0xffddeeff)],
+    [Color(0xff987654), Color(0xfffedcba)],
+    [Color(0xff112233), Color(0xff445566)],
+    [Color(0xff770000), Color(0xffcc3333)],
+    [Color(0xff0088cc), Color(0xff99cc00)],
+    // Add more lists of colors as needed
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,15 +39,29 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 16,
               ),
-              TicketWidget(
-                  width: MediaQuery.of(context).size.width - 16,
-                  height: 180,
-                  isCornerRounded: true,
-                  colorsList: const [Color(0xff275e45), Color(0xff56b295)],
-                  color: Colors.blue,
-                  child: TicketData(
-                    singerInfo: singerInfoList[0],
-                  ))
+              Expanded(
+                child: Stack(
+                  children: List.generate(
+                    singerInfoList.length,
+                    (index) {
+                      return Positioned(
+                        top: index * 60,
+                        child: TicketWidget(
+                          margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                          width: MediaQuery.of(context).size.width - 16,
+                          height: 180,
+                          isCornerRounded: true,
+                          colorsList: colorsList[index % colorsList.length],
+                          color: Colors.blue,
+                          child: TicketData(
+                            singerInfo: singerInfoList[index],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
