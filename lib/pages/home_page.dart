@@ -201,7 +201,7 @@ class TicketData extends StatelessWidget {
             margin: const EdgeInsets.only(left: 7),
             decoration: const BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/images/barr.png'),
+              image: AssetImage('assets/images/barcode.png'),
               fit: BoxFit.cover,
             )),
           ),
