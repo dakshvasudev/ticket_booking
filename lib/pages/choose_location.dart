@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:ticket_booking/config/constants.dart';
 import 'package:ticket_booking/config/theme/theme.dart';
