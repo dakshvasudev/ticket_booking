@@ -11,133 +11,278 @@ class ChooseLocationPage extends StatefulWidget {
 
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
   final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+  bool _isOverlayVisible = false;
+
+  void _showLocationInputDialog(BuildContext context) {
+    _toggleOverlay();
+  }
+
+  void _toggleOverlay() {
+    setState(() {
+      _isOverlayVisible = !_isOverlayVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 52, 16, 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 52, 16, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const IconButton(
-                    onPressed: null,
-                    icon: Icon(
-                      Icons.pin_drop,
-                      size: 28,
-                      color: Colors.red,
-                    ),
-                  ),
-                  Expanded(
-                    child: TextField(
-                      controller: _textEditingController,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter a location',
-                        hintStyle: TextStyle(
-                          color: Colors.white30,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(20.0),
-                      ),
-                      style: typography(context)
-                          .subtitle1
-                          .copyWith(color: Colors.white),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.search,
-                      size: 28,
-                      color: Colors.white,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications,
-                      size: 28,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Text(
-                'Hey James, lets party!',
-                style: typography(context).subtitle2.copyWith(
-                    color: Colors.grey,
-                    letterSpacing: 0.8,
-                    fontWeight: FontWeight.w300),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                'Pick your experience',
-                style: typography(context).title2,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemCount: 12,
-                  itemBuilder: (context, index) => Stack(
+                  Row(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 10.0),
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://picsum.photos/200/300?random=$index'),
-                              fit: BoxFit.cover,
-                            ),
-                            border: Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(8)),
+                      IconButton(
+                        onPressed: () => _showLocationInputDialog(context),
+                        icon: const Icon(
+                          Icons.pin_drop,
+                          size: 28,
+                          color: Colors.red,
+                        ),
                       ),
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          width: 100,
-                          color: Colors.black.withOpacity(0.5),
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Center(
-                            child: Text(
-                              'HELLO',
-                              style: typography(context)
-                                  .strong
-                                  .copyWith(color: Colors.white),
+                      Expanded(
+                        child: TextField(
+                          controller: _textEditingController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter a location',
+                            hintStyle: TextStyle(
+                              color: Colors.white30,
                             ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(20.0),
                           ),
+                          style: typography(context)
+                              .subtitle1
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.search,
+                          size: 28,
+                          color: Colors.white,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.notifications,
+                          size: 28,
+                          color: Colors.white,
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'Hey James, lets party!',
+                    style: typography(context).subtitle2.copyWith(
+                        color: Colors.grey,
+                        letterSpacing: 0.8,
+                        fontWeight: FontWeight.w300),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    'Pick your experience',
+                    style: typography(context).title2,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    height: 100,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: 12,
+                      itemBuilder: (context, index) => Stack(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 10.0),
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://picsum.photos/200/300?random=$index'),
+                                  fit: BoxFit.cover,
+                                ),
+                                border: Border.all(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            child: Container(
+                              width: 100,
+                              color: Colors.black.withOpacity(0.5),
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: Center(
+                                child: Text(
+                                  'HELLO',
+                                  style: typography(context)
+                                      .strong
+                                      .copyWith(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 200,
+                  ),
+                  Text(
+                    'CLICK ON THE LOCATION ICON IN RED',
+                    style: typography(context).title2,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (_isOverlayVisible)
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: () {
+                  _toggleOverlay();
+                },
+                child: Container(
+                  color: Colors.black.withOpacity(0.7),
                 ),
               ),
-              const SizedBox(
-                height: 200,
+            ),
+          if (_isOverlayVisible)
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.3,
+              left: 16,
+              right: 16,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: kBackgroundColor,
+                  borderRadius: BorderRadius.circular(32),
+                  border: Border.all(),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 22, 16, 22),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Choose your location',
+                          style: typography(context).title3,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              _toggleOverlay();
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              size: 28,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: Colors.black87,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.search,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: TextField(
+                              cursorHeight: 16,
+                              controller: _locationController,
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: typography(context)
+                                    .body
+                                    .copyWith(color: Colors.grey),
+                                border: InputBorder.none,
+                              ),
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          if (_locationController.text.isNotEmpty)
+                            IconButton(
+                              onPressed: () {
+                                _locationController.clear();
+                              },
+                              icon: const Icon(
+                                Icons.clear,
+                                size: 20,
+                                color: Colors.grey,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Transform.rotate(
+                          angle: 0.8,
+                          child: const Icon(
+                            Icons.navigation,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          'Detect my location',
+                          style: typography(context).body.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      'Suggested',
+                      style: typography(context).title4,
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                'CLICK ON THE LOCATION ICON IN RED',
-                style: typography(context).title2,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
+            ),
+        ],
       ),
     );
   }
