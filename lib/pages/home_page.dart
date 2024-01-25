@@ -23,69 +23,43 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 32, 8, 24),
-          child: Column(
-            children: [
-              Text(
-                'Your tickets',
-                style: typography(context).title1,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Expanded(
-                child: Stack(
-                  children: List.generate(
-                    3,
-                    (index) {
-                      return Positioned(
-                        top: index * 82,
-                        child: TicketWidget(
-                          margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                          width: MediaQuery.of(context).size.width - 16,
-                          height: 200,
-                          isCornerRounded: true,
-                          colorsList: colorsList[index % colorsList.length],
-                          color: Colors.blue,
-                          child: TicketData(
-                            singerInfo: singerInfoList[index],
-                          ),
+    return Scaffold(
+      backgroundColor: kBackgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 52, 8, 24),
+        child: Column(
+          children: [
+            Text(
+              'Your tickets',
+              style: typography(context).title1,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(
+              child: Stack(
+                children: List.generate(
+                  3,
+                  (index) {
+                    return Positioned(
+                      top: index * 82,
+                      child: TicketWidget(
+                        margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        width: MediaQuery.of(context).size.width - 16,
+                        height: 200,
+                        isCornerRounded: true,
+                        colorsList: colorsList[index % colorsList.length],
+                        color: Colors.blue,
+                        child: TicketData(
+                          singerInfo: singerInfoList[index],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
-              // Expanded(
-              //   child: Stack(
-              //     children: List.generate(
-              //       2,
-              //       (index) {
-              //         final dataIndex = singerInfoList.length - 2 + index;
-              //         return Positioned(
-              //           top: index * 74 + 200,
-              //           child: TicketWidget(
-              //             margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-              //             width: MediaQuery.of(context).size.width - 16,
-              //             height: 180,
-              //             isCornerRounded: true,
-              //             colorsList: colorsList[dataIndex],
-              //             color: Colors.blue,
-              //             child: TicketData(
-              //               singerInfo: singerInfoList[dataIndex],
-              //             ),
-              //           ),
-              //         );
-              //       },
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
