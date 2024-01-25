@@ -131,6 +131,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               color: Colors.blue,
                               child: TicketData(
                                 singerInfo: singerInfoList[index],
+                                imageLink:
+                                    'https://picsum.photos/200/300?random=$index',
                               ),
                             ),
                           );
@@ -156,9 +158,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 }
 
 class TicketData extends StatelessWidget {
-  const TicketData({Key? key, required this.singerInfo}) : super(key: key);
+  const TicketData(
+      {Key? key, required this.singerInfo, required this.imageLink})
+      : super(key: key);
 
   final SingerInfo singerInfo;
+  final String imageLink;
 
   @override
   Widget build(BuildContext context) {
@@ -191,8 +196,8 @@ class TicketData extends StatelessWidget {
                 height: 100,
                 width: 100,
                 decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: NetworkImage('https://picsum.photos/80/75'),
+                    image: DecorationImage(
+                      image: NetworkImage(imageLink),
                       fit: BoxFit.cover,
                     ),
                     border: Border.all(color: Colors.transparent),
