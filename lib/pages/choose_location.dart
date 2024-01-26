@@ -371,7 +371,11 @@ class SearchSuggestionWidget extends StatelessWidget {
       future: locationResource.getPlaces(locationController.text),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+              child: Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: CircularProgressIndicator(),
+          ));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return ListTile(
             contentPadding: EdgeInsets.zero,
