@@ -5,7 +5,9 @@ import 'package:ticket_booking/pages/choose_location.dart';
 import 'package:ticket_booking/pages/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 PersistentTabController _controller = PersistentTabController(initialIndex: 0);
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HomePage(), ChooseLocationPage()];
+  return const [HomePage(), ChooseLocationPage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {

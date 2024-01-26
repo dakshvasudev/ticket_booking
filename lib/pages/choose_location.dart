@@ -396,7 +396,7 @@ class SearchSuggestionWidget extends StatelessWidget {
                   style: typography(context).strongSmallBody,
                 ),
                 onTap: () {
-                  print('Selected: ${suggestions[index]}');
+                  locationController.text = suggestions[index];
                 },
               );
             },
