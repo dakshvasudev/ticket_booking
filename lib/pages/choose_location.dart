@@ -9,6 +9,8 @@ class ChooseLocationPage extends StatefulWidget {
   State<ChooseLocationPage> createState() => _ChooseLocationPageState();
 }
 
+const List<String> cities = ['Jaipur', 'Bangalore', 'Delhi', 'Hyderabad'];
+
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
@@ -154,14 +156,12 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
             ),
           ),
           if (_isOverlayVisible)
-            Positioned.fill(
-              child: GestureDetector(
-                onTap: () {
-                  _toggleOverlay();
-                },
-                child: Container(
-                  color: Colors.black.withOpacity(0.7),
-                ),
+            GestureDetector(
+              onTap: () {
+                _toggleOverlay();
+              },
+              child: Container(
+                color: Colors.black.withOpacity(0.6),
               ),
             ),
           if (_isOverlayVisible)
@@ -209,6 +209,9 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                       ),
                       child: Row(
                         children: [
+                          const SizedBox(
+                            width: 8,
+                          ),
                           const Icon(
                             Icons.search,
                             size: 20,
@@ -272,16 +275,65 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                       ],
                     ),
                     const SizedBox(
-                      width: 16,
+                      height: 16,
                     ),
                     Text(
                       'Suggested',
-                      style: typography(context).title4,
+                      style: typography(context).strong,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    SizedBox(
+                      height: 90,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: cities.length,
+                          itemBuilder: (context, index) {
+                            return SuggestedCityIcon(
+                              cityName: cities[index],
+                            );
+                          }),
                     ),
                   ],
                 ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class SuggestedCityIcon extends StatelessWidget {
+  const SuggestedCityIcon({super.key, required this.cityName});
+  final String cityName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 90,
+      width: 90,
+      margin: const EdgeInsets.only(right: 10.0),
+      decoration: BoxDecoration(
+        color: kBackgroundColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white12),
+      ),
+      padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
+      child: Column(
+        children: [
+          const Icon(
+            Icons.location_on,
+            color: Colors.white,
+            size: 36,
+          ),
+          const Spacer(),
+          Text(
+            cityName,
+            style: typography(context).smallBody,
+          ),
         ],
       ),
     );

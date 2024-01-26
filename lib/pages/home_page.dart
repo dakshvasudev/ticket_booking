@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ),
                     ),
                     // History Tab (You can replace this with your history implementation)
-                    Center(
+                    const Center(
                       child: Text(
                         'History Tab Content',
                         style: TextStyle(color: Colors.white),
