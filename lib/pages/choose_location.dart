@@ -50,22 +50,13 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                           color: Colors.red,
                         ),
                       ),
-                      Expanded(
-                        child: TextField(
-                          controller: _textEditingController,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter a location',
-                            hintStyle: TextStyle(
-                              color: Colors.white30,
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.all(20.0),
-                          ),
-                          style: typography(context)
-                              .subtitle1
-                              .copyWith(color: Colors.white),
-                        ),
+                      Text(
+                        'Indira Nagar',
+                        style: typography(context)
+                            .subtitle1
+                            .copyWith(color: Colors.white),
                       ),
+                      const Spacer(),
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
@@ -245,6 +236,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                             IconButton(
                               onPressed: () {
                                 _locationController.clear();
+                                setState(() {});
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -301,6 +293,10 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                                 itemCount: cities.length,
                                 itemBuilder: (context, index) {
                                   return SuggestedCityIcon(
+                                    onPressed: () {
+                                      _locationController.text = cities[index];
+                                      setState(() {});
+                                    },
                                     cityName: cities[index],
                                   );
                                 }),
@@ -323,34 +319,39 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
 }
 
 class SuggestedCityIcon extends StatelessWidget {
-  const SuggestedCityIcon({super.key, required this.cityName});
+  const SuggestedCityIcon(
+      {super.key, required this.cityName, required this.onPressed});
   final String cityName;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      width: 90,
-      margin: const EdgeInsets.only(right: 10.0),
-      decoration: BoxDecoration(
-        color: kBackgroundColor,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white12),
-      ),
-      padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
-      child: Column(
-        children: [
-          const Icon(
-            Icons.location_on,
-            color: Colors.white,
-            size: 36,
-          ),
-          const Spacer(),
-          Text(
-            cityName,
-            style: typography(context).smallBody,
-          ),
-        ],
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        height: 90,
+        width: 90,
+        margin: const EdgeInsets.only(right: 10.0),
+        decoration: BoxDecoration(
+          color: kBackgroundColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white12),
+        ),
+        padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
+        child: Column(
+          children: [
+            const Icon(
+              Icons.location_on,
+              color: Colors.white,
+              size: 36,
+            ),
+            const Spacer(),
+            Text(
+              cityName,
+              style: typography(context).smallBody,
+            ),
+          ],
+        ),
       ),
     );
   }

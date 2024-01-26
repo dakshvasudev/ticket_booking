@@ -27,8 +27,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0);
-    _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(initialPage: 1);
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 1);
   }
 
   @override
@@ -112,10 +112,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 child: PageView(
                   controller: _pageController,
                   onPageChanged: (index) {
-                    _tabController.animateTo(index);
+                    setState(() {
+                      _tabController.animateTo(index);
+                    });
                   },
                   children: [
-                    // Upcoming Tab
+                    const Center(
+                      child: Text(
+                        'Upcoming Tab Content',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                     Stack(
                       children: List.generate(
                         3,
@@ -137,13 +144,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                           );
                         },
-                      ),
-                    ),
-                    // History Tab (You can replace this with your history implementation)
-                    const Center(
-                      child: Text(
-                        'History Tab Content',
-                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
