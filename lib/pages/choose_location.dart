@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_booking/config/constants.dart';
 import 'package:ticket_booking/config/theme/theme.dart';
+import 'package:ticket_booking/resources/networking/location_resource.dart';
 
 class ChooseLocationPage extends StatefulWidget {
   const ChooseLocationPage({super.key});
@@ -15,6 +16,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   bool _isOverlayVisible = false;
+  final LocationResource _locationResource = LocationResource();
 
   void _showLocationInputDialog(BuildContext context) {
     _toggleOverlay();
@@ -234,6 +236,9 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
+                              onChanged: (query) {
+                                setState(() {});
+                              },
                             ),
                           ),
                           if (_locationController.text.isNotEmpty)
@@ -250,52 +255,63 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        Transform.rotate(
-                          angle: 0.8,
-                          child: const Icon(
-                            Icons.navigation,
-                            color: Colors.white,
-                            size: 18,
+                    if (_locationController.text.isEmpty)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 16,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          'Detect my location',
-                          style: typography(context).body.copyWith(
-                                fontWeight: FontWeight.w500,
+                          Row(
+                            children: [
+                              Transform.rotate(
+                                angle: 0.8,
+                                child: const Icon(
+                                  Icons.navigation,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
                               ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      'Suggested',
-                      style: typography(context).strong,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SizedBox(
-                      height: 90,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cities.length,
-                          itemBuilder: (context, index) {
-                            return SuggestedCityIcon(
-                              cityName: cities[index],
-                            );
-                          }),
-                    ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'Detect my location',
+                                style: typography(context).body.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Suggested',
+                            style: typography(context).strong,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          SizedBox(
+                            height: 90,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: cities.length,
+                                itemBuilder: (context, index) {
+                                  return SuggestedCityIcon(
+                                    cityName: cities[index],
+                                  );
+                                }),
+                          ),
+                        ],
+                      ),
+                    if (_locationController.text.isNotEmpty)
+                      SearchSuggestionWidget(
+                        locationResource: _locationResource,
+                        locationController: _locationController,
+                      ),
                   ],
                 ),
               ),
@@ -336,6 +352,57 @@ class SuggestedCityIcon extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SearchSuggestionWidget extends StatelessWidget {
+  final LocationResource locationResource;
+  final TextEditingController locationController;
+
+  const SearchSuggestionWidget(
+      {super.key,
+      required this.locationResource,
+      required this.locationController});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<String>>(
+      future: locationResource.getPlaces(locationController.text),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              'No Suggestions found',
+              style: typography(context).strongSmallBody,
+            ),
+            onTap: () {
+              print('Selected: No Suggestions found');
+            },
+          );
+        } else {
+          final suggestions = snapshot.data!;
+          return ListView.builder(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: suggestions.length <= 5 ? suggestions.length : 5,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(
+                  suggestions[index],
+                  style: typography(context).strongSmallBody,
+                ),
+                onTap: () {
+                  print('Selected: ${suggestions[index]}');
+                },
+              );
+            },
+          );
+        }
+      },
     );
   }
 }
