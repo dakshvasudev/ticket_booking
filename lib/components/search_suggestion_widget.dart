@@ -4,8 +4,12 @@ import 'package:ticket_booking/resources/networking/location_resource.dart';
 
 class SearchSuggestionWidget extends StatelessWidget {
   final TextEditingController locationController;
+  final Function(String) onLocationSelected;
 
-  const SearchSuggestionWidget({super.key, required this.locationController});
+  const SearchSuggestionWidget(
+      {super.key,
+      required this.locationController,
+      required this.onLocationSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class SearchSuggestionWidget extends StatelessWidget {
                   style: typography(context).strongSmallBody,
                 ),
                 onTap: () {
-                  locationController.text = suggestions[index];
+                  onLocationSelected(suggestions[index]);
                 },
               );
             },

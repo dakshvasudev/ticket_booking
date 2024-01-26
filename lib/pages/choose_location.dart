@@ -14,6 +14,7 @@ class ChooseLocationPage extends StatefulWidget {
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
   final TextEditingController _locationController = TextEditingController();
   bool _isOverlayVisible = false;
+  String? selectedLocationText;
 
   void _showLocationInputDialog(BuildContext context) {
     _toggleOverlay();
@@ -48,7 +49,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                         ),
                       ),
                       Text(
-                        'Indira Nagar',
+                        selectedLocationText ?? 'Select your location',
                         style: typography(context)
                             .subtitle1
                             .copyWith(color: Colors.white),
@@ -301,6 +302,13 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                     if (_locationController.text.isNotEmpty)
                       SearchSuggestionWidget(
                         locationController: _locationController,
+                        onLocationSelected: (selectedLocation) {
+                          setState(() {
+                            selectedLocationText = selectedLocation;
+                            _isOverlayVisible = false;
+                            _locationController.clear();
+                          });
+                        },
                       ),
                   ],
                 ),
