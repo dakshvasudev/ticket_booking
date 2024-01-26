@@ -13,7 +13,6 @@ class ChooseLocationPage extends StatefulWidget {
 const List<String> cities = ['Jaipur', 'Bangalore', 'Delhi', 'Hyderabad'];
 
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
-  final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   bool _isOverlayVisible = false;
   final LocationResource _locationResource = LocationResource();
