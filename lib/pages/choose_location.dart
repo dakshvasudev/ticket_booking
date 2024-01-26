@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_booking/components/search_suggestion_widget.dart';
+import 'package:ticket_booking/components/suggested_city_icon.dart';
 import 'package:ticket_booking/config/constants.dart';
 import 'package:ticket_booking/config/theme/theme.dart';
-import 'package:ticket_booking/resources/networking/location_resource.dart';
 
 class ChooseLocationPage extends StatefulWidget {
   const ChooseLocationPage({super.key});
@@ -10,12 +11,9 @@ class ChooseLocationPage extends StatefulWidget {
   State<ChooseLocationPage> createState() => _ChooseLocationPageState();
 }
 
-const List<String> cities = ['Jaipur', 'Bangalore', 'Delhi', 'Hyderabad'];
-
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
   final TextEditingController _locationController = TextEditingController();
   bool _isOverlayVisible = false;
-  final LocationResource _locationResource = LocationResource();
 
   void _showLocationInputDialog(BuildContext context) {
     _toggleOverlay();
@@ -223,9 +221,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                                     .copyWith(color: Colors.grey),
                                 border: InputBorder.none,
                               ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
+                              style: typography(context).smallBody,
                               onChanged: (query) {
                                 setState(() {});
                               },
@@ -304,7 +300,6 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                       ),
                     if (_locationController.text.isNotEmpty)
                       SearchSuggestionWidget(
-                        locationResource: _locationResource,
                         locationController: _locationController,
                       ),
                   ],
@@ -313,101 +308,6 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
             ),
         ],
       ),
-    );
-  }
-}
-
-class SuggestedCityIcon extends StatelessWidget {
-  const SuggestedCityIcon(
-      {super.key, required this.cityName, required this.onPressed});
-  final String cityName;
-  final void Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: 90,
-        width: 90,
-        margin: const EdgeInsets.only(right: 10.0),
-        decoration: BoxDecoration(
-          color: kBackgroundColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white12),
-        ),
-        padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.location_on,
-              color: Colors.white,
-              size: 36,
-            ),
-            const Spacer(),
-            Text(
-              cityName,
-              style: typography(context).smallBody,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SearchSuggestionWidget extends StatelessWidget {
-  final LocationResource locationResource;
-  final TextEditingController locationController;
-
-  const SearchSuggestionWidget(
-      {super.key,
-      required this.locationResource,
-      required this.locationController});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<String>>(
-      future: locationResource.getPlaces(locationController.text),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-              child: Padding(
-            padding: EdgeInsets.only(top: 16.0),
-            child: CircularProgressIndicator(),
-          ));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              'No Suggestions found',
-              style: typography(context).strongSmallBody,
-            ),
-            onTap: () {
-              print('Selected: No Suggestions found');
-            },
-          );
-        } else {
-          final suggestions = snapshot.data!;
-          return ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: suggestions.length <= 5 ? suggestions.length : 5,
-            itemBuilder: (context, index) {
-              return ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(
-                  suggestions[index],
-                  style: typography(context).strongSmallBody,
-                ),
-                onTap: () {
-                  locationController.text = suggestions[index];
-                },
-              );
-            },
-          );
-        }
-      },
     );
   }
 }
