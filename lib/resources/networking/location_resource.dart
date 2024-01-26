@@ -13,14 +13,9 @@ class LocationResource {
         },
       );
 
-      if (response.statusCode == 200) {
-        final results = response.data['results'] as List<dynamic>;
-        final places =
-            results.map((result) => result['name'] as String).toList();
-        return places;
-      } else {
-        throw Exception('Failed to fetch places');
-      }
+      final results = response.data['results'] as List<dynamic>;
+      final places = results.map((result) => result['name'] as String).toList();
+      return places;
     } catch (e) {
       throw Exception('Failed to fetch places: $e');
     }

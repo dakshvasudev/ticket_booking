@@ -395,6 +395,7 @@ class SearchSuggestionWidget extends StatelessWidget {
             itemCount: suggestions.length <= 5 ? suggestions.length : 5,
             itemBuilder: (context, index) {
               return ListTile(
+                contentPadding: EdgeInsets.zero,
                 title: Text(
                   suggestions[index],
                   style: typography(context).strongSmallBody,
