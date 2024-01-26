@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:ticket_booking/config/constants.dart';
 import 'package:ticket_booking/pages/choose_location.dart';
-import 'package:ticket_booking/pages/home_page.dart';
+import 'package:ticket_booking/pages/home/home_page.dart';
 
 void main() {
   runApp(

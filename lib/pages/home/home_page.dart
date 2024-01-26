@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_booking/components/ticket_data_widget.dart';
-import 'package:ticket_booking/components/ticket_widget.dart';
 import 'package:ticket_booking/config/constants.dart';
 import 'package:ticket_booking/config/theme/theme.dart';
-import 'package:ticket_booking/resources/tickets/dummy_data_for_tickets.dart';
+import 'package:ticket_booking/pages/home/history_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -115,29 +113,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         style: typography(context).strong,
                       ),
                     ),
-                    Stack(
-                      children: List.generate(
-                        3,
-                        (index) {
-                          return Positioned(
-                            top: index * 82,
-                            child: TicketWidget(
-                              margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                              width: MediaQuery.of(context).size.width - 16,
-                              height: 200,
-                              isCornerRounded: true,
-                              colorsList: colorsList[index % colorsList.length],
-                              color: Colors.blue,
-                              child: TicketData(
-                                singerInfo: singerInfoList[index],
-                                imageLink:
-                                    'https://picsum.photos/200/300?random=$index',
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    HistoryTabHomePage(),
                   ],
                 ),
               ),
