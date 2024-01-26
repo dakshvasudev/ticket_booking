@@ -15,7 +15,7 @@ class SuggestedCityIcon extends StatelessWidget {
       child: Container(
         height: 90,
         width: 90,
-        margin: const EdgeInsets.only(right: 10.0),
+        margin: const EdgeInsets.only(left: 6.0, right: 6.0),
         decoration: BoxDecoration(
           color: kBackgroundColor,
           borderRadius: BorderRadius.circular(16),

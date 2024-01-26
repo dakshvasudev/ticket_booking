@@ -34,7 +34,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 52, 16, 8),
+              padding: const EdgeInsets.only(top: 52),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -76,19 +76,25 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                   const SizedBox(
                     height: 4,
                   ),
-                  Text(
-                    'Hey James, lets party!',
-                    style: typography(context).subtitle2.copyWith(
-                        color: Colors.grey,
-                        letterSpacing: 0.8,
-                        fontWeight: FontWeight.w300),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: Text(
+                      'Hey James, lets party!',
+                      style: typography(context).subtitle2.copyWith(
+                          color: Colors.grey,
+                          letterSpacing: 0.8,
+                          fontWeight: FontWeight.w300),
+                    ),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  Text(
-                    'Pick your experience',
-                    style: typography(context).title2,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: Text(
+                      'Pick your experience',
+                      style: typography(context).title2,
+                    ),
                   ),
                   const SizedBox(
                     height: 16,
@@ -137,10 +143,13 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                   const SizedBox(
                     height: 200,
                   ),
-                  Text(
-                    'CLICK ON THE LOCATION ICON IN RED',
-                    style: typography(context).title2,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: Text(
+                      'CLICK ON THE LOCATION ICON IN RED',
+                      style: typography(context).title2,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
@@ -166,27 +175,30 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                   borderRadius: BorderRadius.circular(32),
                   border: Border.all(),
                 ),
-                padding: const EdgeInsets.fromLTRB(16, 22, 16, 22),
+                padding: const EdgeInsets.fromLTRB(0, 22, 0, 22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Choose your location',
-                          style: typography(context).title3,
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              _toggleOverlay();
-                            },
-                            icon: const Icon(
-                              Icons.close,
-                              size: 28,
-                              color: Colors.white,
-                            ))
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Choose your location',
+                            style: typography(context).title3,
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                _toggleOverlay();
+                              },
+                              icon: const Icon(
+                                Icons.close,
+                                size: 28,
+                                color: Colors.white,
+                              ))
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
@@ -198,6 +210,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(),
                       ),
+                      margin: const EdgeInsets.only(left: 16.0, right: 16.0),
                       child: Row(
                         children: [
                           const SizedBox(
@@ -250,33 +263,41 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
                           const SizedBox(
                             height: 16,
                           ),
-                          Row(
-                            children: [
-                              Transform.rotate(
-                                angle: 0.8,
-                                child: const Icon(
-                                  Icons.navigation,
-                                  color: Colors.white,
-                                  size: 18,
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 16.0),
+                            child: Row(
+                              children: [
+                                Transform.rotate(
+                                  angle: 0.8,
+                                  child: const Icon(
+                                    Icons.navigation,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                'Detect my location',
-                                style: typography(context).body.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ],
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Detect my location',
+                                  style: typography(context).body.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 16,
                           ),
-                          Text(
-                            'Suggested',
-                            style: typography(context).strong,
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 16.0),
+                            child: Text(
+                              'Suggested',
+                              style: typography(context).strong,
+                            ),
                           ),
                           const SizedBox(
                             height: 16,
