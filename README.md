@@ -2,8 +2,10 @@
 
 ## Getting Started
 
-Video of the assignment application - 
+Video of the application - 
 
-https://github.com/dakshvasudev/ticket_booking/assets/91746245/a2060dcb-78be-4dd8-baf1-18b6f8c3f626
+https://github.com/dakshvasudev/ticket_booking/assets/91746245/85f22f75-942b-4f0a-969a-34a29ab8cda8
+
+
 
 
